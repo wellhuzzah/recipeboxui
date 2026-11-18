@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import RecipeForm from '../components/admin/RecipeForm'
 import BVForm from '../components/admin/BVForm'
 import StatsDashboard from '../components/admin/StatsDashboard'
+import FeaturedMenuForm from '../components/admin/FeaturedMenuForm'
 import { getRecipes, getStats, getRecipe } from '../api/recipes'
 
 const LOCAL_PREFIXES = ['192.168.', '10.', '127.']
@@ -104,6 +105,12 @@ function Admin() {
 					>
 						Stats
 					</button>
+					<button
+						className={`admin-tab ${tab === 'featured' ? 'active' : ''}`}
+						onClick={() => setTab('featured')}
+					>
+						Featured Menu
+					</button>
 				</nav>
 			</header>
 
@@ -167,6 +174,13 @@ function Admin() {
 					<div className="admin-section">
 						<h2 className="admin-section-title">Stats</h2>
 						<StatsDashboard stats={stats} />
+					</div>
+				)}
+
+				{tab === 'featured' && (
+					<div className="admin-section">
+						<h2 className="admin-section-title">Featured Menu</h2>
+						<FeaturedMenuForm apiKey={apiKey} />
 					</div>
 				)}
 			</main>

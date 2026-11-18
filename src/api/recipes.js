@@ -20,3 +20,17 @@ export const deleteRecipe = (id, apiKey) => api.delete(`/recipes/${id}`, {
 
 export const updateBVStatus = (id, payload) =>
 	api.patch(`/booze-and-vinyl/${id}/status`, payload)
+
+export const getFeaturedMenu = () =>
+    api.get('/featured-menu')
+
+export const updateFeaturedMenu = (data, apiKey) =>
+    api.put('/featured-menu', data, {
+        headers: { 'X-Api-Key': apiKey }
+    })
+
+export const getFeaturedRecipes = () =>
+    api.get('/featured-menu/recipes')
+
+export const getTags = () => api.get('/recipes/tags')
+export const getRecipeSearch = (q) => api.get(`/recipes/search?q=${encodeURIComponent(q)}`)
