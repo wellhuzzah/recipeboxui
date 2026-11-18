@@ -171,7 +171,7 @@ function RecipePage() {
 				{recipe.artist && (
 					<div className="cocktail-bv">
 						<span className="cocktail-bv-label">Booze & Vinyl</span>
-						{recipe.artist} — {recipe.album} (Vol. {recipe.volume}, Side {recipe.side})
+						{recipe.artist} — {recipe.album} (Side {recipe.side})
 					</div>
 				)}
 

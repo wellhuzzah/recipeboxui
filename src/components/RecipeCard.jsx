@@ -38,7 +38,7 @@ function RecipeCard({ recipe, onClick }) {
 						<circle cx="26" cy="26" r="8.5" fill="none" stroke="#a02020" strokeWidth="0.4"/>
 						<circle cx="26" cy="26" r="1.5" fill="#1a1208"/>
 					</svg>
-					{recipe.artist} — {recipe.album} (Vol. {recipe.volume}, Side {recipe.side})
+					{recipe.artist} — {recipe.album} (Side {recipe.side})
 				</div>
 			)}
 

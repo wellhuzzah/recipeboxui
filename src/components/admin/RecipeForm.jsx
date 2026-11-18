@@ -10,7 +10,6 @@ const EMPTY_RECIPE = {
 	notes: '',
 	now_serving: false,
 	original: false,
-	booze_and_vinyl_id: null,
 	ingredients: [],
 	tags: []
 }
@@ -133,10 +132,6 @@ function RecipeForm({ recipe, apiKey, onSave, onCancel }) {
 				<div className="form-field full">
 					<label>Notes</label>
 					<textarea className="admin-input admin-textarea" value={form.notes || ''} onChange={e => set('notes', e.target.value)} />
-				</div>
-				<div className="form-field">
-					<label>Booze & Vinyl ID</label>
-					<input className="admin-input" type="number" value={form.booze_and_vinyl_id || ''} onChange={e => set('booze_and_vinyl_id', e.target.value ? parseInt(e.target.value) : null)} />
 				</div>
 				<div className="form-field form-checkbox">
 					<label>

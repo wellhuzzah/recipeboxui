@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { createRecipe, updateRecipe } from '../../api/recipes'
 import api from '../../api/client'
 
 const api_base = api.defaults.baseURL
@@ -103,15 +102,27 @@ function BVForm({ apiKey, recipes, onSave }) {
 	}
 
 	const handleLinkRecipe = async (recipeId, bvId) => {
-		const recipe = recipes.find(r => r.id === parseInt(recipeId))
-		if (!recipe) return
-		await updateRecipe(recipe.id, {
-			...recipe,
-			booze_and_vinyl_id: bvId,
-			ingredients: recipe.ingredients || [],
-			tags: recipe.tags || []
-		}, apiKey)
-		onSave()
+		if (!recipeId) return
+		try {
+			const res = await fetch(`${api_base}/booze-and-vinyl/${bvId}/link`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Api-Key': apiKey
+				},
+				body: JSON.stringify({ recipe_id: parseInt(recipeId) })
+			})
+			if (!res.ok) throw new Error(`Link failed: ${res.status}`)
+			const linked = recipes.find(r => r.id === parseInt(recipeId))
+			setEntries(prev => prev.map(e =>
+				e.id === bvId
+					? { ...e, recipe_id: parseInt(recipeId), recipe_name: linked?.name ?? null }
+					: e
+			))
+			onSave()
+		} catch {
+			setError('Failed to link recipe.')
+		}
 	}
 
 	const handleToggleStatus = async (groupEntries, field) => {
@@ -192,7 +203,7 @@ function BVForm({ apiKey, recipes, onSave }) {
 								<div className="bv-actions">
 									<select
 										className="admin-input bv-link-select"
-										defaultValue=""
+										value={entry.recipe_id ?? ''}
 										onChange={e => {
 											if (e.target.value) handleLinkRecipe(e.target.value, entry.id)
 										}}

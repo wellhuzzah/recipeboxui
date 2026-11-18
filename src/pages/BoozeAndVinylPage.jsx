@@ -29,7 +29,7 @@ function BoozeAndVinylPage() {
 	const buildGroups = (entries) => {
 		const map = new Map()
 		entries.forEach(e => {
-			const key = `${e.artist}__${e.album}`
+			const key = `${e.artist}__${e.album}__${e.volume}`
 			if (!map.has(key)) map.set(key, { artist: e.artist, album: e.album, year: e.year ?? null, owned: e.owned, spun: e.spun, volume: e.volume, original: e.original ?? false, sides: [] })
 			map.get(key).sides.push(e)
 		})
