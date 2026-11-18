@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import LetterBoard from '../components/LetterBoard'
+import api from '../api/client'
 
-const API_BASE = 'https://bar.letsfriggen.party/api'
+const API_BASE = api.defaults.baseURL
 
 function BoozeAndVinylPage() {
 	const [entries, setEntries] = useState([])

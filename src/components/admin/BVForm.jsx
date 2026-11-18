@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { createRecipe, updateRecipe } from '../../api/recipes'
+import api from '../../api/client'
 
-const api_base = 'https://bar.letsfriggen.party/api'
+const api_base = api.defaults.baseURL
 
 async function getBVEntries() {
 	const res = await fetch(`${api_base}/booze-and-vinyl/`)

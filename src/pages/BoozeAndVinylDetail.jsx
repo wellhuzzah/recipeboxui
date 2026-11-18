@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import RecipeCard from '../components/RecipeCard'
+import api from '../api/client'
 
-const API_BASE = 'https://bar.letsfriggen.party/api'
+const API_BASE = api.defaults.baseURL
 
 function BoozeAndVinylDetail() {
 	const { id } = useParams()
