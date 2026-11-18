@@ -5,7 +5,7 @@ function LetterBoard({ recipe, message, children, onClick }) {
 				{children
 					? <div className="letterboard-body">{children}</div>
 					: <>
-						{!message && <div className="letterboard-label">Now Serving</div>}
+						{!message && <div className="letterboard-label letterboard-header">Now Serving</div>}
 						<div className="letterboard-name">{message ?? recipe.name}</div>
 						{!message && recipe?.description && (
 							<div className="letterboard-desc">{recipe.description}</div>
