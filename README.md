@@ -43,9 +43,15 @@ npm run lint
   `App.jsx`, `CardDeck.jsx`, `FeaturedMenuForm.jsx`, `Admin.jsx` and `RecipeForm.jsx`. They don't
   affect the build.
 
-## Deployment note
+## Deployment
 
-The site runs straight from the deployed checkout, so saved edits go live right away.
-Committing changes nothing, but `git switch`, `checkout`, `stash` or `reset` changes the live
-site the moment the files on disk change. To move `master` to another branch's commit without
-touching the files, use `git fetch . <branch>:master`.
+Since November 2026, Caddy serves the production build in `dist/`, not the Vite dev server.
+
+- Saved edits are not live until `npm run build`. The build takes about a second, and the site
+  changes as soon as it finishes, because Caddy serves `dist/` directly.
+- Git operations (`switch`, `checkout`, `stash`, `reset`) no longer change the live site by
+  themselves. The next build does.
+- The Windows service that ran `npm run dev` (`recipe_box_ui`) is disabled.
+- The simplest edit loop is: edit, `npm run build`, refresh. `npm run dev` still works, but a page
+  opened at `localhost:5173` cannot load data. The API only accepts requests from the `thebar`
+  origin (CORS in the API's `app/main.py`).
